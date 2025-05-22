@@ -1,0 +1,521 @@
+aula 1
+
+Sql
+
+Com certeza! Vamos explorar alguns comandos SQL fundamentais de forma prática e com exemplos simples para você entender como eles funcionam. Imagine que temos uma tabela chamada "Clientes" com as seguintes colunas:
+
+ID: Número de identificação único para cada cliente (inteiro).
+Nome: Nome completo do cliente (texto).
+Idade: Idade do cliente (inteiro).
+Cidade: Cidade onde o cliente mora (texto).
+Aqui estão alguns comandos SQL essenciais:
+
+1. SELECT (Selecionar Dados)
+
+O comando SELECT é usado para escolher quais colunas você quer visualizar de uma ou mais tabelas.
+
+Exemplo 1: Selecionar todos os dados de todos os clientes.
+
+SQL
+
+SELECT * FROM Clientes;
+Isso retornará todas as colunas (ID, Nome, Idade, Cidade) para todos os clientes na tabela "Clientes". O asterisco (*) é um curinga que significa "todas as colunas".
+
+Exemplo 2: Selecionar apenas os nomes e as cidades dos clientes.
+
+SQL
+
+SELECT Nome, Cidade FROM Clientes;
+Este comando mostrará apenas as colunas "Nome" e "Cidade" para cada cliente.
+
+Exemplo 3: Selecionar clientes com mais de 25 anos.
+
+SQL
+
+SELECT Nome, Idade FROM Clientes WHERE Idade > 25;
+Aqui, usamos a cláusula WHERE para filtrar os resultados, mostrando apenas os clientes cuja idade é maior que 25.
+
+2. INSERT INTO (Inserir Dados)
+
+O comando INSERT INTO é usado para adicionar novas linhas (registros) a uma tabela.
+
+Exemplo 1: Inserir um novo cliente com todos os dados.
+
+SQL
+
+INSERT INTO Clientes (ID, Nome, Idade, Cidade) VALUES (5, 'Mariana Silva', 30, 'São Paulo');
+Este comando adiciona um novo cliente com ID 5, nome 'Mariana Silva', idade 30 e cidade 'São Paulo'. A ordem dos valores na cláusula VALUES deve corresponder à ordem das colunas especificadas entre parênteses após o nome da tabela.
+
+Exemplo 2: Inserir um novo cliente especificando apenas nome e cidade.
+
+SQL
+
+INSERT INTO Clientes (Nome, Cidade) VALUES ('João Pedro', 'Rio de Janeiro');
+Neste caso, assumimos que a coluna "ID" pode ser auto-incrementada pelo banco de dados ou que podemos inserir um valor nulo (se permitido) e a coluna "Idade" terá um valor padrão (se definido na criação da tabela) ou também poderá ser nula.
+
+3. UPDATE (Atualizar Dados)
+
+O comando UPDATE é usado para modificar dados existentes em uma tabela. É crucial usar a cláusula WHERE para especificar quais linhas devem ser atualizadas; caso contrário, todas as linhas da tabela serão afetadas.
+
+Exemplo 1: Atualizar a cidade de um cliente específico.
+
+SQL
+
+UPDATE Clientes SET Cidade = 'Belo Horizonte' WHERE ID = 2;
+Este comando altera a cidade do cliente com o ID igual a 2 para 'Belo Horizonte'.
+
+Exemplo 2: Aumentar a idade de todos os clientes em 1 ano.
+
+SQL
+
+UPDATE Clientes SET Idade = Idade + 1;
+Este comando aumentará a idade de todos os clientes na tabela "Clientes". Tenha muito cuidado ao executar comandos UPDATE sem a cláusula WHERE!
+
+4. DELETE FROM (Excluir Dados)
+
+O comando DELETE FROM é usado para remover linhas de uma tabela. Assim como no UPDATE, é fundamental usar a cláusula WHERE para evitar a exclusão de todos os registros.
+
+Exemplo 1: Excluir o cliente com um ID específico.
+
+SQL
+
+DELETE FROM Clientes WHERE ID = 4;
+Este comando remove a linha correspondente ao cliente com o ID igual a 4.
+
+Exemplo 2: Excluir todos os clientes da tabela.
+
+SQL
+
+DELETE FROM Clientes;
+Este comando removerá todos os registros da tabela "Clientes". Use com extrema cautela!
+
+5. CREATE TABLE (Criar Tabela)
+
+O comando CREATE TABLE é usado para definir a estrutura de uma nova tabela no banco de dados. Você especifica o nome da tabela e as colunas com seus respectivos tipos de dados e restrições.
+
+Exemplo: Criar a tabela "Produtos".
+
+SQL
+
+CREATE TABLE Produtos (
+    ProdutoID INT PRIMARY KEY,
+    NomeProduto VARCHAR(100) NOT NULL,
+    Preco DECIMAL(10, 2),
+    Estoque INT
+);
+Este comando cria uma tabela chamada "Produtos" com as seguintes colunas:
+
+ProdutoID: Um número inteiro que é a chave primária (identificador único).
+NomeProduto: Uma string de até 100 caracteres, que não pode ser nula.
+Preco: Um número decimal com até 10 dígitos no total, sendo 2 casas decimais.
+Estoque: Um número inteiro representando a quantidade em estoque.
+6. DROP TABLE (Excluir Tabela)
+
+O comando DROP TABLE é usado para remover uma tabela inteira do banco de dados. Esta operação é irreversível e todos os dados da tabela serão perdidos.
+
+Exemplo: Excluir a tabela "Produtos".
+
+SQL
+
+DROP TABLE Produtos;
+Este comando remove a tabela "Produtos" e todos os seus dados.
+
+7. ORDER BY (Ordenar Resultados)
+
+A cláusula ORDER BY é usada com o comando SELECT para classificar os resultados de uma consulta com base em uma ou mais colunas.
+
+Exemplo 1: Selecionar todos os clientes e ordená-los por nome em ordem alfabética.
+
+SQL
+
+SELECT * FROM Clientes ORDER BY Nome ASC;
+ASC especifica a ordem crescente (padrão).
+
+Exemplo 2: Selecionar os clientes e ordená-los por idade em ordem decrescente.
+
+SQL
+
+SELECT Nome, Idade FROM Clientes ORDER BY Idade DESC;
+DESC especifica a ordem decrescente.
+
+8. LIMIT (Limitar Resultados)
+
+A cláusula LIMIT é usada para restringir o número de linhas retornadas por uma consulta SELECT.
+
+Exemplo: Selecionar apenas os 3 primeiros clientes.
+
+SQL
+
+SELECT * FROM Clientes LIMIT 3;
+
+ Utilizando Operadores Aritméticos em Colunas:
+
+Você pode aplicar operadores como adição (+), subtração (-), multiplicação (*), divisão (/) e módulo (%) diretamente nas colunas numéricas em suas consultas SELECT. O resultado desses cálculos pode ser exibido em uma nova coluna (que você pode nomear usando a palavra-chave AS).
+
+Imagine que temos uma tabela chamada "Pedidos" com as seguintes colunas:
+
+Produto: Nome do produto (texto).
+
+Quantidade: Quantidade pedida (inteiro).
+
+PrecoUnitario: Preço de cada unidade do produto (numérico).
+
+Imposto: Valor do imposto sobre o pedido (numérico).
+
+Exemplo 1: Calcular o valor total de cada item do pedido (quantidade * preço unitário).
+
+SQL
+
+SELECT
+    Produto,
+    Quantidade,
+    PrecoUnitario,
+    Quantidade * PrecoUnitario AS ValorTotalItem
+FROM Pedidos;
+Nesta consulta, criamos uma nova coluna chamada ValorTotalItem que é o resultado da multiplicação das colunas Quantidade e PrecoUnitario para cada linha da tabela "Pedidos".
+
+Exemplo 2: Calcular o valor total de cada item incluindo o imposto (quantidade * preço unitário + imposto).
+
+SQL
+
+SELECT
+    Produto,
+    Quantidade,
+    PrecoUnitario,
+    Imposto,
+    (Quantidade * PrecoUnitario) + Imposto AS ValorTotalComImposto
+FROM Pedidos;
+Aqui, calculamos o valor total do item e somamos o valor do imposto. Note o uso de parênteses para garantir a ordem correta das operações.
+
+Exemplo 3: Calcular o preço unitário com um desconto de 10%.
+
+SQL
+
+SELECT
+    Produto,
+    PrecoUnitario,
+    PrecoUnitario * 0.90 AS PrecoComDesconto
+FROM Pedidos;
+Este exemplo mostra como aplicar uma porcentagem para calcular um desconto.
+
+2. Utilizando Funções de Agregação:
+
+O SQL também oferece funções de agregação que permitem realizar cálculos em conjuntos de dados (várias linhas) para retornar um único valor resumido. Algumas das funções de agregação mais comuns incluem:
+
+SUM(): Calcula a soma dos valores em uma coluna.
+AVG(): Calcula a média dos valores em uma coluna.
+COUNT(): Conta o número de linhas ou valores em uma coluna.
+MAX(): Retorna o valor máximo em uma coluna.
+MIN(): Retorna o valor mínimo em uma coluna.
+Imagine que ainda temos a tabela "Pedidos".
+
+Exemplo 1: Calcular o total de todas as quantidades pedidas.
+
+SQL
+
+SELECT SUM(Quantidade) AS TotalDeItensPedidos FROM Pedidos;
+Esta consulta retorna uma única linha com a soma de todos os valores na coluna Quantidade, nomeada como TotalDeItensPedidos.
+
+Exemplo 2: Calcular a média do preço unitário dos produtos.
+
+SQL
+
+SELECT AVG(PrecoUnitario) AS MediaPrecoUnitario FROM Pedidos;
+Este comando retorna a média dos valores na coluna PrecoUnitario.
+
+Exemplo 3: Contar o número total de pedidos.
+
+SQL
+
+SELECT COUNT(*) AS NumeroTotalDePedidos FROM Pedidos;
+COUNT(*) conta o número total de linhas na tabela "Pedidos".
+
+Exemplo 4: Encontrar o preço unitário mais alto e o mais baixo.
+
+SQL
+
+SELECT MAX(PrecoUnitario) AS PrecoMaximo, MIN(PrecoUnitario) AS PrecoMinimo FROM Pedidos;
+Esta consulta retorna duas colunas: o maior e o menor valor da coluna PrecoUnitario.
+
+3. Combinando Operadores e Funções de Agregação com GROUP BY:
+
+A cláusula GROUP BY é essencial quando você quer aplicar funções de agregação a subgrupos de dados dentro de uma tabela. Ela agrupa as linhas que têm o mesmo valor em uma ou mais colunas.
+
+Imagine que temos a tabela "Vendas" com as colunas:
+
+Produto: Nome do produto (texto).
+
+QuantidadeVendida: Quantidade vendida (inteiro).
+
+PrecoUnitario: Preço de cada unidade vendida (numérico).
+
+Exemplo: Calcular o total de vendas por produto.
+
+SQL
+
+SELECT
+    Produto,
+    SUM(QuantidadeVendida * PrecoUnitario) AS TotalVendasPorProduto
+FROM Vendas
+GROUP BY Produto;
+Esta consulta agrupa as vendas pelo Produto e, para cada produto, calcula a soma do valor total das vendas (QuantidadeVendida * PrecoUnitario).
+
+Tabela: Clientes
+
+Esta tabela armazenará informações básicas sobre os clientes.
+
+Coluna	Tipo de Dados	Descrição
+ClienteID	INT	Identificador único
+Nome	VARCHAR(100)	Nome completo
+Cidade	VARCHAR(50)	Cidade de residência
+
+Exportar para as Planilhas
+Comando para criar a tabela Clientes:
+
+SQL
+
+CREATE TABLE Clientes (
+    ClienteID INT PRIMARY KEY,
+    Nome VARCHAR(100) NOT NULL,
+    Cidade VARCHAR(50)
+);
+
+-- Inserindo alguns dados de exemplo na tabela Clientes
+INSERT INTO Clientes (ClienteID, Nome, Cidade) VALUES
+(1, 'Ana Souza', 'Rio de Janeiro'),
+(2, 'Pedro Alves', 'São Paulo'),
+(3, 'Carla Mendes', 'Rio de Janeiro'),
+(4, 'Lucas Oliveira', 'Belo Horizonte');
+Tabela: Vendas
+
+Esta tabela registrará as vendas realizadas, referenciando os clientes.
+
+Coluna	Tipo de Dados	Descrição
+VendaID	INT	Identificador único
+ClienteID	INT	ID do cliente que comprou
+DataVenda	DATE	Data da venda
+ValorTotal	DECIMAL(10, 2)	Valor total da venda
+
+Exportar para as Planilhas
+Comando para criar a tabela Vendas:
+
+SQL
+
+CREATE TABLE Vendas (
+    VendaID INT PRIMARY KEY,
+    ClienteID INT,
+    DataVenda DATE NOT NULL,
+    ValorTotal DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (ClienteID) REFERENCES Clientes(ClienteID)
+);
+
+-- Inserindo alguns dados de exemplo na tabela Vendas
+INSERT INTO Vendas (VendaID, ClienteID, DataVenda, ValorTotal) VALUES
+(101, 1, '2025-05-15', 150.00),
+(102, 2, '2025-05-16', 220.50),
+(103, 1, '2025-05-17', 85.00),
+(104, 3, '2025-05-18', 310.75),
+(105, 2, '2025-05-19', 120.00);
+Exemplo de JOIN:
+
+Agora, vamos usar o comando JOIN para combinar informações das tabelas "Clientes" e "Vendas". O tipo mais comum de JOIN é o INNER JOIN, que retorna apenas as linhas onde há uma correspondência entre as colunas especificadas nas duas tabelas.
+
+Exemplo 1: Listar o nome do cliente e o valor total de cada venda.
+
+Queremos ver qual cliente realizou cada venda e qual foi o valor total. Para isso, precisamos relacionar as tabelas usando a coluna ClienteID, que existe em ambas.
+
+SQL
+
+SELECT
+    c.Nome AS NomeCliente,
+    v.VendaID,
+    v.DataVenda,
+    v.ValorTotal
+FROM
+    Clientes c
+INNER JOIN
+    Vendas v ON c.ClienteID = v.ClienteID;
+Explicação:
+
+SELECT c.Nome AS NomeCliente, v.VendaID, v.DataVenda, v.ValorTotal: Selecionamos o nome do cliente da tabela "Clientes" (renomeando a coluna para NomeCliente), o ID da venda, a data da venda e o valor total da tabela "Vendas". Usamos aliases (c para "Clientes" e v para "Vendas") para tornar a consulta mais curta e legível.
+FROM Clientes c: Especificamos a primeira tabela a ser consultada, "Clientes", e lhe damos o alias c.
+INNER JOIN Vendas v ON c.ClienteID = v.ClienteID: Especificamos a segunda tabela a ser combinada, "Vendas" (com o alias v), e a condição de junção (ON). A condição c.ClienteID = v.ClienteID indica que queremos combinar as linhas onde o valor da coluna ClienteID na tabela "Clientes" é igual ao valor da coluna ClienteID na tabela "Vendas".
+Resultado do Exemplo 1:
+
+NomeCliente	VendaID	DataVenda	ValorTotal
+Ana Souza	101	2025-05-15	150.00
+Pedro Alves	102	2025-05-16	220.50
+Ana Souza	103	2025-05-17	85.00
+Carla Mendes	104	2025-05-18	310.75
+Pedro Alves	105	2025-05-19	120.00
+
+Exportar para as Planilhas
+Este resultado mostra cada venda realizada e o nome do cliente que a efetuou.
+
+Outros tipos de JOIN (para ilustrar, mas o INNER JOIN é o mais comum para este exemplo):
+
+LEFT JOIN (ou LEFT OUTER JOIN): Retorna todas as linhas da tabela da esquerda (neste caso, "Clientes") e as linhas correspondentes da tabela da direita ("Vendas"). Se não houver correspondência na tabela da direita, as colunas da direita terão valores NULL.
+
+SQL
+
+SELECT
+    c.Nome AS NomeCliente,
+    v.VendaID,
+    v.DataVenda,
+    v.ValorTotal
+FROM
+    Clientes c
+LEFT JOIN
+    Vendas v ON c.ClienteID = v.ClienteID;
+Este exemplo retornaria todos os clientes, mesmo aqueles que não realizaram nenhuma compra (nesse caso, as colunas VendaID, DataVenda e ValorTotal seriam NULL para esses clientes).
+
+RIGHT JOIN (ou RIGHT OUTER JOIN): Similar ao LEFT JOIN, mas retorna todas as linhas da tabela da direita ("Vendas") e as linhas correspondentes da tabela da esquerda ("Clientes"). Se não houver correspondência na tabela da esquerda, as colunas da esquerda terão valores NULL.
+
+SQL
+
+SELECT
+    c.Nome AS NomeCliente,
+    v.VendaID,
+    v.DataVenda,
+    v.ValorTotal
+FROM
+    Clientes c
+RIGHT JOIN
+    Vendas v ON c.ClienteID = v.ClienteID;
+Neste caso, se houvesse alguma venda registrada com um ClienteID que não existisse na tabela "Clientes" (o que não deveria acontecer devido à chave estrangeira, mas é um cenário para entender o RIGHT JOIN), essa venda seria listada e as colunas de "Clientes" seriam NULL.
+
+
+**************************************
+1. Pandas:
+Manipulação de Dados Eficiente Pandas é a biblioteca mais popular para manipulação e análise de dados, construída sobre o NumPy.
+
+Principais estruturas:
+Series: Array unidimensional com índices personalizados
+DataFrame: Tabela bidimensional (como uma planilha Excel)
+Recursos poderosos:
+Leitura/escrita de dados: Suporte a CSV, Excel, SQL, JSON e mais
+Manipulação de dados: Filtragem, agrupamento, agregação e pivoteamento
+Tratamento de valores ausentes: Métodos para lidar com dados faltantes
+Operações temporais: Ferramentas para trabalhar com datas e horas
+
+ Exemplo utilização:
+import pandas as pd
+
+# Criando um DataFrame
+data = {'Nome': ['Ana', 'João', 'Maria'],
+        'Idade': [25, 30, 28],
+        'Salário': [5000, 7000, 6000]}
+df = pd.DataFrame(data)
+
+# Operações básicas
+print(df.head())      # Mostra as primeiras linhas
+print("   ")
+print(df.info())      # Informações sobre o DataFrame
+print("   ")
+print(df.describe())  # Estatísticas descritivas
+
+2. NumPy:
+A Base para Computação Numérica NumPy (Numerical Python) é a biblioteca fundamental para computação científica em Python, fornecendo:
+
+Principais características:
+Arrays multidimensionais: Estruturas de dados eficientes para cálculos numéricos
+Operações vetorizadas: Permite operações em arrays inteiros sem loops explícitos
+Funções matemáticas: Amplo conjunto de funções matemáticas prontas para uso
+Integração com outras bibliotecas: Base para muitas outras bibliotecas científicas
+
+# Exemplo utilização:
+import numpy as np
+
+# Criando um array NumPy
+arr = np.array([1, 2, 3, 4, 5])
+
+# Operações vetorizadas
+print(arr + 10) # Soma 10 a cada elemento
+print(arr - 1)  # Subitrai 1 de cada elemento
+print(arr * 2)  # Multiplica cada elemento por 2
+print(arr ** 2) # Eleva cada elemento ao quadrado
+print(arr // 2) # Divide cada elemento por 2 (divisão inteira)
+
+Como NumPy e Pandas trabalham juntos
+NumPy: melhor para cálculos numéricos puros
+Pandas: melhor para manipulação de dados estruturados
+4. Atividade: Análise de Vendas com NumPy + Pandas
+Geração de Dados com NumPy:
+
+Criamos arrays otimizados para cálculos numéricos (vendas, custos)
+Usamos distribuições estatísticas do NumPy (np.random.poisson)
+
+import numpy as np
+import pandas as pd
+
+# 1. Criação de dados fictícios com NumPy
+np.random.seed(42)
+meses = np.array(['Jan', 'Fev', 'Mar', 'Abr', 'Mai'])
+vendas = np.random.randint(100, 500, size=5)
+custos = vendas * np.random.uniform(0.3, 0.7, size=5)
+
+print(meses)
+print(vendas)
+print(custos)
+
+Conversão para Pandas:
+
+Transformamos os arrays em DataFrame para manipulação tabular
+Ganhamos rotulagem automática de colunas e índices
+
+# 2. Conversão para DataFrame do Pandas
+dados = pd.DataFrame({
+    'Mês': meses,
+    'Vendas (R$)': vendas,
+    'Custos (R$)': np.round(custos, 2),
+    'Clientes': np.random.poisson(lam=50, size=5)
+})
+
+print(dados)
+
+Operações Híbridas:
+
+Pandas para operações baseadas em colunas (dados['Lucro'] = ...)
+NumPy para cálculos vetorizados (np.round para arredondamento)
+
+# 3. Cálculos híbridos (Pandas + NumPy)
+dados['Lucro (R$)'] = dados['Vendas (R$)'] - dados['Custos (R$)']
+dados['Margem %'] = np.round((dados['Lucro (R$)'] / dados['Vendas (R$)']) * 100, 1)
+
+print(dados)
+
+Vantagens Combinadas:
+
+Utilizando as duas biblitecas para criar uma medida
+
+# 4. Pandas para filtros complexos + NumPy para cálculos
+alto_lucro = dados[dados['Lucro (R$)'] > np.percentile(dados['Lucro (R$)'], 75)]
+
+print(alto_lucro)
+
+
+# 4. Análise estatística com NumPy
+print(f"Média de vendas: R$ {np.mean(dados['Vendas (R$)']):.2f}")
+print(f"Desvio padrão: R$ {np.std(dados['Vendas (R$)']):.2f}")
+
+# 5. Visualização com Pandas
+display(dados.style.format({
+    'Vendas (R$)': 'R$ {:.2f}',
+    'Custos (R$)': 'R$ {:.2f}',
+    'Lucro (R$)': 'R$ {:.2f}'
+}))
+
+Atividade:
+Realize a inclusão da colula Alto lucro. Inserindo true ou false para quando o lucro for maior que a média do lucro.
+# Adicionando coluna Alto_lucro (TRUE se lucro > média)
+media_lucro = dados['Lucro (R$)'].mean()
+dados['Alto_lucro'] = dados['Lucro (R$)'] > media_lucro
+
+# Visualização formatada
+display(dados.style.format({
+    'Vendas (R$)': 'R$ {:.2f}',
+    'Custos (R$)': 'R$ {:.2f}',
+    'Lucro (R$)': 'R$ {:.2f}',
+    'Margem %': '{:.1f}%'
+
+}))

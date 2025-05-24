@@ -9,6 +9,8 @@ Original file is located at
 
 #exemplo utilização
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 
 #Criando um DataFrame
 data = {
@@ -23,8 +25,6 @@ print(df.head())
 print(df.info())
 
 print(df.describe())
-
-import numpy as np
 
 #Criando um array
 arr = np.array([1, 2, 3, 4, 5])
@@ -64,9 +64,6 @@ print(dados)
 
 dados['Margem %'] = np.round((dados['Lucro (R$)']/ dados['Vendas (R$)']) * 100, 1) #Arredondamento para 1 casa decimal
 print(dados)
-
-import numpy as np
-import matplotlib.pyplot as plt
 
 carteira_A = [0.01, 0.02, -0.015, 0.03, 0.005]
 variancia_A = np.var(carteira_A)
@@ -113,3 +110,49 @@ Covariancia_Populacional_CD = Covariancia_Amostral_CD[0, 1] * (n - 1) / n
 Covariancia_Amostral_EF = np.cov(carteira_E, carteira_F, bias=True)[0][1]
 print("Covariância entre C e D populacional:",Covariancia_Populacional_CD)
 print("Covariância entre E e F por amostragem:",Covariancia_Amostral_EF)
+
+salarios={'Salários':[10,20,30,40,50,60,70,80,90,100,5]}
+df=pd.DataFrame(salarios)
+display(df)
+
+assimetria=df['Salários'].skew()
+media=df['Salários'].mean()
+mediana=df['Salários'].median()
+print('Assimetria:',assimetria)
+print('Média:',media)
+print('Mediana:',mediana)
+
+#Distribuições simétrica e assimétrica
+
+if -0.5 <= assimetria <= 0.5:
+    print('A distribuição é simétrica')
+elif assimetria > -0.5:
+    print('A distribuição é assimétrica positiva')
+else:
+    print('A distribuição é assimétrica negativa')
+
+#Curtose
+curtose=df['Salários'].kurtosis()
+print('Curtose:',curtose)
+
+'''Curtose é uma medida que mede o GRAU DE CONCENTRAÇÃO dos dados ao redor da MÉDIA. No Pandas, isso é visto pelo método kurtosis() e nos ajuda a ver os "níveis de curtose" que indicam a presença ou ausência de outliers.
+
+Como vou interpretar meus dados:
+
+Curtose >= 2.5 e Curtose <= 3.5: MESOCÚRTICA (distribuição normal, dados bem distribuídos em torno da média);
+
+Curtose < 2.5: PLATICÚRTICA (dados mais dispersos; presença comum de outliers);
+
+Curtose > 3.5: LEPTOCÚRTICA (dados MUITO concentrados na média; outliers MUITO presentes).'''
+
+if 2.5 <= curtose <= 3.5:
+    print('A distribuição é MESOCÚRTICA')
+elif curtose < 2.5:
+    print('A distribuição é PLATIOCÚRTICA')
+else:
+    print('A distribuição é LEPTOCÚRTICA')
+
+plt.boxplot(df['Salários'])
+plt.title('Boxplot dos Salários')
+plt.ylabel('Salário')
+plt.show()

@@ -1,6 +1,7 @@
 # SQL_Colab
 
 Operações Matemáticas e SQL no Colab: https://dontpad.com/analise_senac
+
 Exercício: https://dontpad.com/analise_senac/exerciciorelacao
 
 Ferramenta de armazenamento de arquivos SQL online: https://sqliteonline.com/
